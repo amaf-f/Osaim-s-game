@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#6c55e8">
+<title>أنقذوا الروبوت! | مغامرة الرياضيات والعلوم</title>
+<style>
+*{box-sizing:border-box} :root{--navy:#23315f;--purple:#6c55e8;--blue:#40b9f4;--green:#36c991;--yellow:#ffd34f;--pink:#ff79b3}
+body{margin:0;background:linear-gradient(155deg,#e6f7ff,#fff1f8 58%,#fff9d8);font-family:Tahoma,Arial,sans-serif;color:var(--navy);min-height:100vh}
+button{font:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible{outline:4px solid #ffb600;outline-offset:3px}
+.app{max-width:720px;margin:auto;padding:12px 12px 28px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.logo{font-weight:900;font-size:1rem}.stars{background:#fff;border:2px solid #f9e5a2;padding:8px 12px;border-radius:99px;font-weight:900;white-space:nowrap}
+.hero{border-radius:26px;padding:18px 14px;background:linear-gradient(125deg,#6554e8,#a55de0 65%,#ed78ba);color:#fff;box-shadow:0 6px 0 #d8c9ff;text-align:center;position:relative;overflow:hidden}
+.hero h1{margin:0;font-size:clamp(1.8rem,7vw,2.65rem);line-height:1.3}.hero p{margin:4px 0 0;font-weight:700;font-size:1rem;line-height:1.6}
+.robot-stage{display:flex;justify-content:center;align-items:center;gap:16px;margin:14px auto 6px;max-width:500px}
+.robot{font-size:clamp(78px,23vw,120px);filter:drop-shadow(0 7px 0 #4535b0);animation:bob 2.5s ease-in-out infinite;line-height:1.1}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+.bubble{background:#fff;color:#332c75;border-radius:22px;padding:13px 14px;font-size:1.06rem;font-weight:900;line-height:1.65;box-shadow:0 4px 0 #d9d0ff;position:relative;flex:1}
+.speaker{border:0;background:#fff2a8;color:#614400;border-radius:15px;padding:11px 13px;font-weight:900;box-shadow:0 4px 0 #e5c75b;min-width:100px;margin-top:8px}
+.card{background:#fff;border:3px solid #fff;border-radius:24px;box-shadow:0 5px 0 #e5defc;padding:17px 14px;margin-top:15px}
+.school{text-align:center;line-height:1.9;font-weight:900;color:#5142b0;border:2px dashed #b9adff;background:#fffdf8;font-size:.94rem}
+.home-title{text-align:center;font-weight:900;font-size:1.2rem;margin:18px 0 10px}
+.bigbtn{display:block;width:100%;border:0;border-radius:19px;padding:16px 14px;font-weight:900;font-size:1.18rem;background:linear-gradient(100deg,#ffce48,#ffad48);color:#523800;box-shadow:0 5px 0 #e49a31}
+.smallnote{text-align:center;color:#736ba0;font-size:.88rem;font-weight:700;line-height:1.7;margin:10px 4px}
+.hidden{display:none!important}.quizhead{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:900}.tag{border-radius:99px;background:#eeeaff;padding:8px 10px;font-size:.9rem}
+.progress{height:12px;background:#ece8ff;border-radius:99px;margin:14px 0;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,#37d4a0,#4cbaf4);width:0%;transition:width .3s;border-radius:99px}
+.qtext{text-align:center;font-weight:900;font-size:clamp(1.35rem,5vw,1.9rem);line-height:1.6;margin:14px 0 8px}
+.picture{text-align:center;font-size:clamp(2.6rem,10vw,4rem);line-height:1.45;min-height:55px;margin:8px 0 14px;letter-spacing:2px}
+.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.answer{border:3px solid #e4e0ff;background:#f4f1ff;color:#302b6b;border-radius:18px;min-height:74px;padding:12px 8px;font-size:1.15rem;font-weight:900;box-shadow:0 4px 0 #d9d2ff;line-height:1.5}
+.answer:disabled{opacity:1}.answer.good{background:#dcfff0;border-color:#3bc996;color:#126344}.answer.bad{background:#fff0f2;border-color:#ff8da0;color:#8b2e40}
+.feedback{text-align:center;border-radius:17px;padding:12px;margin-top:13px;font-weight:900;line-height:1.65;background:#fff7d8;font-size:1rem}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.actions button{flex:1;min-width:125px;border:0;border-radius:15px;padding:13px 10px;font-weight:900}.listen{background:#6c55e8;color:white;box-shadow:0 4px 0 #4c3bb3}.next{background:#8ce4c9;color:#155842;box-shadow:0 4px 0 #58b99a}.back{background:#f0edff;color:#473a9d}
+.result{text-align:center}.trophy{font-size:4.5rem}.result h2{font-size:1.8rem;margin:6px 0}.result p{font-weight:800;line-height:1.9}
+.footer{text-align:center;font-size:.87rem;line-height:1.9;font-weight:800;color:#5142a0;margin:20px 5px 0}.footer strong{font-size:1rem}
+@media(max-width:390px){.app{padding:8px}.robot-stage{gap:9px}.bubble{font-size:.96rem;padding:10px}.speaker{min-width:88px;padding:10px 8px}.answers{grid-template-columns:1fr}.answer{min-height:60px}.school{font-size:.86rem}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="top"><div class="logo">🚀 مغامرات التعلّم الذكي</div><div class="stars">⭐ نجومي: <span id="stars">0</span></div></div>
+  <header class="hero">
+    <h1>أنقذوا الروبوت! 🔋</h1>
+    <p>جاوبوا عن الأسئلة واجمعوا الطاقة<br>حتى يعود روبوتنا للعمل!</p>
+  </header>
+  <section class="robot-stage">
+    <div class="robot" aria-label="روبوت">🤖</div>
+    <div style="flex:1">
+      <div class="bubble" id="speechText">مرحبًا يا أبطال! أنا روبوتكم الصغير. ساعدوني أجمع الطاقة!</div>
+      <button class="speaker" id="speakBtn">🔊 اسمع الروبوت</button>
+    </div>
+  </section>
+  <section class="card school">
+    <div>موقع الطالب أُسيم بن فائز التفاعلي</div>
+    <div>إشراف المعلمة رُدينه والمعلمة مُنى</div>
+    <div>مدرسة التميز للطفولة المبكرة</div>
+  </section>
+
+  <section id="home" class="card">
+    <div class="home-title">🎮 مستعدون للمغامرة؟</div>
+    <p style="text-align:center;font-weight:700;line-height:1.8">الروبوت بيقرأ لكم كل سؤال بصوت واضح. اسمعوا السؤال، ثم اضغطوا على الإجابة الصحيحة!</p>
+    <button class="bigbtn" id="startBtn">🚀 ابدأوا إنقاذ الروبوت!</button>
+    <div class="smallnote">🔊 اضغطوا «اسمع الروبوت» في أي وقت لسماع الكلام مرة ثانية.</div>
+  </section>
+
+  <section id="quiz" class="card hidden" aria-live="polite">
+    <div class="quizhead"><span id="category">🌈 مغامرة الأبطال</span><span class="tag">🔋 <span id="battery">0</span> / 8</span></div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="qtext" id="qtext"></div>
+    <div class="picture" id="picture"></div>
+    <div class="answers" id="answers"></div>
+    <div class="feedback hidden" id="feedback"></div>
+    <div class="actions"><button class="listen" id="repeatBtn">🔊 اقرأ السؤال</button><button class="next hidden" id="nextBtn">السؤال التالي ➡️</button></div>
+  </section>
+
+  <section id="result" class="card result hidden">
+    <div class="trophy" id="resultEmoji">🏆</div>
+    <h2 id="resultTitle">أنقذتم الروبوت!</h2>
+    <p id="resultText"></p>
+    <button class="bigbtn" id="againBtn">🔁 نلعب من جديد</button>
+    <div class="actions"><button class="back" id="homeBtn">🏠 الصفحة الرئيسية</button><button class="listen" id="resultSpeak">🔊 اسمعوا الروبوت</button></div>
+  </section>
+
+  <footer class="footer"><strong>موقع الطالب أُسيم بن فائز التفاعلي</strong><br>إشراف المعلمة رُدينه والمعلمة مُنى<br>مدرسة التميز للطفولة المبكرة</footer>
+</main>
+<script>
+const questions=[
+{cat:"🔢 الرياضيات",q:"يا أبطال، أي عدد أكبر؟",v:"١٢  أم  ٩",a:["٩","١٢"],c:1,ex:"برافو! العدد اثنا عشر أكبر من العدد تسعة."},
+{cat:"🌱 العلوم",q:"وش يحتاج النبات عشان ينمو؟",v:"🌱 ☀️ 💧",a:["ماء وضوء","ألعاب"],c:0,ex:"ممتاز! النبات يحتاج إلى الماء والضوء والهواء."},
+{cat:"🔢 الرياضيات",q:"عدّوا التفاحات. كم تفاحة تشوفون؟",v:"🍎 🍎 🍎 🍎",a:["٣ تفاحات","٤ تفاحات"],c:1,ex:"صح! أحسنتم، أربع تفاحات."},
+{cat:"🐾 العلوم",q:"وين يعيش السمك؟",v:"🐟",a:["في الماء","في الصحراء"],c:0,ex:"صحيح! السمك يعيش في الماء."},
+{cat:"🔢 الرياضيات",q:"أكملوا النمط: دائرة، مربع، دائرة، مربع... وش بعد؟",v:"🔵 🟦 🔵 🟦  ؟",a:["دائرة 🔵","مربع 🟦"],c:0,ex:"رائع! بعد المربع تجي الدائرة، لأن النمط يتكرر."},
+{cat:"🌍 العلوم",q:"أيّ واحد من هذي الأشياء جزء من أرضنا؟",v:"🌍",a:["اليابسة والماء","الألعاب فقط"],c:0,ex:"أحسنتم! أرضنا فيها يابسة وماء."},
+{cat:"➕ الرياضيات",q:"معي كرتين، وأخذت كرتين زيادة. كم صار عندي؟",v:"⚽ ⚽  +  ⚽ ⚽",a:["٣ كرات","٤ كرات"],c:1,ex:"صحيح! اثنان زائد اثنين يساوي أربعة."},
+{cat:"🧠 الذكاء الاصطناعي",q:"الروبوت يقول: النبات ما يحتاج ماء. كلامي صحيح؟",v:"🤖💬🌱",a:["لا، الروبوت أخطأ","نعم، صحيح"],c:0,ex:"أحسنتم! الروبوت ممكن يخطئ، وإحنا نتحقق من المعلومة."}
+];
+let order=[],idx=0,score=0,stars=0,answered=false,mode="quiz";
+const $=id=>document.getElementById(id);
+function say(text){$("speechText").textContent=text;if(!("speechSynthesis"in window)){return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="ar-SA";u.rate=.78;u.pitch=1.13;const voices=speechSynthesis.getVoices();const v=voices.find(x=>x.lang.toLowerCase()==="ar-sa")||voices.find(x=>x.lang.toLowerCase().startsWith("ar"));if(v)u.voice=v;speechSynthesis.speak(u)}
+function intro(){say("مرحبًا يا أبطال! أنا روبوتكم الصغير. ساعدوني أجمع الطاقة! اضغطوا ابدأوا، وأنا بقرأ لكم كل سؤال. اسمعوا زين واختاروا الإجابة الصحيحة.");}
+function start(){speechSynthesis?.cancel?.();order=[...questions.keys()];idx=0;score=0;answered=false;$("stars").textContent=stars;$("home").classList.add("hidden");$("result").classList.add("hidden");$("quiz").classList.remove("hidden");render();window.scrollTo({top:0,behavior:"smooth"});}
+function render(){answered=false;const q=questions[order[idx]];$("category").textContent=q.cat;$("battery").textContent=score;$("bar").style.width=(idx/questions.length*100)+"%";$("qtext").textContent=q.q;$("picture").textContent=q.v;$("feedback").classList.add("hidden");$("nextBtn").classList.add("hidden");$("repeatBtn").classList.remove("hidden");$("answers").innerHTML="";q.a.forEach((txt,i)=>{const b=document.createElement("button");b.className="answer";b.textContent=txt;b.onclick=()=>answer(i,b);$("answers").appendChild(b)});say(q.q+" "+q.v+" الخيار الأول: "+q.a[0]+". الخيار الثاني: "+q.a[1]+".");}
+function answer(i,btn){if(answered)return;answered=true;const q=questions[order[idx]];[...$("answers").children].forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add("good")});const f=$("feedback");f.classList.remove("hidden");if(i===q.c){score++;stars++;$("stars").textContent=stars;$("battery").textContent=score;f.textContent="🔋 "+q.ex;f.style.background="#dcfff0";say("إجابة صحيحة! "+q.ex+" جمعتوا طاقة للروبوت!")}else{btn.classList.add("bad");f.textContent="💛 مو مشكلة، نتعلّم بالمحاولة! "+q.ex;f.style.background="#fff7d8";say("مو مشكلة يا أبطال. "+q.ex)}$("bar").style.width=((idx+1)/questions.length*100)+"%";$("nextBtn").classList.remove("hidden");$("nextBtn").textContent=idx===questions.length-1?"شغّلوا الروبوت! 🎉":"السؤال التالي ➡️";}
+function next(){if(idx<questions.length-1){idx++;render();window.scrollTo({top:0,behavior:"smooth"})}else{finish()}}
+function finish(){speechSynthesis?.cancel?.();$("quiz").classList.add("hidden");$("result").classList.remove("hidden");if(score>=6){$("resultEmoji").textContent="🤖✨";$("resultTitle").textContent="أنقذتم الروبوت!";$("resultText").textContent="يا سلام! جمعتوا "+score+" من 8 بطاريات. الروبوت رجع يشتغل بفضلكم! أنتم أبطال العلم والأرقام!";say("يا سلام! أنقذتموني! شكرًا يا أبطال. أنتم أذكياء ورائعون!")}else{$("resultEmoji").textContent="🔋🤖";$("resultTitle").textContent="باقي شوي وننقذ الروبوت!";$("resultText").textContent="جمعتوا "+score+" من 8 بطاريات. أحسنتم على المحاولة! العبوا مرة ثانية وبتجمعون طاقة أكثر.";say("شكرًا على المحاولة يا أبطال! هيا نلعب مرة ثانية ونجمع طاقة أكثر.")}window.scrollTo({top:0,behavior:"smooth"});}
+function home(){speechSynthesis?.cancel?.();$("quiz").classList.add("hidden");$("result").classList.add("hidden");$("home").classList.remove("hidden");say("أهلًا بكم من جديد! اضغطوا ابدأوا عشان نكمل مغامرتنا.");window.scrollTo({top:0,behavior:"smooth"})}
+$("startBtn").addEventListener("click",start);$("speakBtn").addEventListener("click",()=>say($("speechText").textContent));$("repeatBtn").addEventListener("click",()=>{const q=questions[order[idx]];say(q.q+" "+q.v+" الخيار الأول: "+q.a[0]+". الخيار الثاني: "+q.a[1]+".")});$("nextBtn").addEventListener("click",next);$("againBtn").addEventListener("click",start);$("homeBtn").addEventListener("click",home);$("resultSpeak").addEventListener("click",()=>say($("resultText").textContent));
+if("speechSynthesis"in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>{}}
+</script>
+</body></html>
